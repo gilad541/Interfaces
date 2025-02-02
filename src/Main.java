@@ -9,6 +9,7 @@ public class Main {
             }
         };
         Scanner scanner = new Scanner(System.in);
+        DB.innitMap();
         System.out.println("Enter 1 for Motorcycle, 2 for Car or 3 for Truck. Enter -1 if you finished");
         int input = scanner.nextInt();
         while (input != -1)
@@ -18,18 +19,15 @@ public class Main {
             switch (input)
             {
                 case 1: {
-                    Vehicle vehicle = new Motorcycle(name);
-                    DB.addVehicle(vehicle);
+                    DB.build(1, name);
                     break;
                 }
                 case 2: {
-                    Vehicle vehicle = new Car(name);
-                    DB.addVehicle(vehicle);
+                    DB.build(2, name);
                     break;
                 }
                 case 3:{
-                    Vehicle vehicle = new Truck(name);
-                    DB.addVehicle(vehicle);
+                    DB.build(3, name);
                     break;
                 }
                 default:
@@ -38,7 +36,7 @@ public class Main {
             System.out.println("Enter 1 for Motorcycle, 2 for Car or 3 for Truck. Enter -1 if you finished");
             input = scanner.nextInt();
         }
-        Thread thread = new Thread(Garage.start(DB.getVehicles(), protocolGarage));
+        Thread thread = new Thread(Garage.start(DB.getVehcilesQueue(), protocolGarage));
         thread.start();
     }
 }
